@@ -1,0 +1,61 @@
+import 'package:flutter/material.dart';
+class Scrolling_Page extends StatelessWidget {
+  
+  static const routeName = 'Scrolling_Page';
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Custom Scroll View"),
+      ),
+      body: Container(
+        height: 670,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            Expanded(
+              child: CustomScrollView(
+                slivers: <Widget>[
+                  SliverGrid(
+                    gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+                      maxCrossAxisExtent: 200.0,
+                      mainAxisSpacing: 10.0,
+                      crossAxisSpacing: 10.0,
+                      childAspectRatio: 4.0,
+                    ),
+                    delegate: SliverChildBuilderDelegate(
+                      (BuildContext context, int index) {
+                        return Container(
+                          alignment: Alignment.center,
+                          color: Colors.lightBlue[100 * (index % 9)],
+                          child: Text('list item $index'),
+                        );
+                      },
+                      childCount: 30,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            Container(
+              child: RaisedButton(
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(60)),
+                color: Colors.red,
+                child: Text("Show Code"),
+                onPressed: () {
+                  const url = 'https://google.com';
+                  launchURL(url);
+                },
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
